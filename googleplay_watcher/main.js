@@ -2,11 +2,12 @@ var gplay = require('google-play-scraper');
 var fs = require("fs");
 const { exit } = require('process');
 
-const outputFilename  = process.argv[2]; // first argument
+let outputFilename  = process.argv[2]; // first argument
 if (outputFilename == undefined) {
-  console.error("Error: an argument is required");
-  console.error("command usage: \`node main.js output.json\`");
-  exit(1);
+  require('date-utils');
+  var dt = new Date();
+  var formatted = dt.toFormat("YYYYMMDDHH24MISS");
+  outputFilename = formatted+".json";
 }
 
 gplay.list({
